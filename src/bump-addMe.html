@@ -1,0 +1,107 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="shared-styles.html">
+<!-- <link rel="import" href="../bower_components/polymer-themes/everest.html">
+-->
+
+
+<dom-module id="bump-addMe">
+    <template>
+        <style include="shared-styles">
+        :host {
+        display: block;
+
+        padding: 10px;
+      }
+        </style>
+        <div class="card" id="addMeCard">
+            <h1>Thumb Sucking Kids</h1>
+            <paper-textarea label="Why is this a problem for you?" value={{reason}} required="true" ></paper-textarea>
+            <paper-dropdown-menu label="How often?"> 
+                <paper-listbox class="dropdown-content" selected={{occurance}}>
+                 <template is="dom-repeat" items="{{occuranceChoices}}">
+                        <paper-item>{{item}}</paper-item>
+                <!--   <paper-item>Occassionally</paper-item>
+                    <paper-item>Daily</paper-item>
+                    <paper-item>Weekly</paper-item>
+                    <paper-item>Monthly</paper-item>
+                    <paper-item>Hi Clara! :-)</paper-item> -->
+                    </template>
+                </paper-listbox>
+            </paper-dropdown-menu>
+           <div><br></div>
+           <span>
+                <div>How do you rate it: <span>{{rating}}</span></div>
+               <paper-slider label="how do you rate it?" min="1" max="10" pin snap max-markers="10"  value={{rating}}></paper-slider>
+           </span>
+           <div>
+            <paper-button  class="app-paper-button" raised on-tap="_addMe">addMe</paper-button>
+            </div>
+           <paper-dialog class="paper-dialog" id="dialog">
+               <h1>Why +AddMe ?</h1>
+                <p>Joining BUMPS is the first step to making a difference. You can:</p>
+                <p><ul>
+                    <li>Share your problem experiences</li>
+                    <li>Gain valuable insights</li>
+                    <li>Help solvers create solutions that meet your needs</li>
+                    <li>Stay informed of important new developments</li>
+                </ul></p>
+                <p>BUMPScouts play a key role in detecting and sharing common BUMPS (Big Unsolved Meaningful Problems worth Solving).</p>
+<!--
+            <p>When joining BUMPS you can share problem experiences. Your input will help others gain valuable problem insights.</p>
+            <p>This will substantially increase the chances of creating effective solutions that meet your needs.</p> -->
+            <div>
+                <paper-checkbox checked={{hideAddMeInfoDialog}} >Got it. You don't need to show me this again.</paper-checkbox>
+            </div>
+            <div>
+                <paper-button class="primary" raised dialog-dismiss on-tap="_dialogDismiss">Ok</paper-button>
+            </div>
+            </paper-dialog >
+         </div>
+
+
+    </template>
+    <script>
+    Polymer({
+        is: "bump-addMe",
+        properties: {
+            reason: String,
+            occurance: Number,
+            rating: Number,
+            hideAddMeInfoDialog: {
+                type: Boolean,
+                value: false
+            },
+            occuranceChoices: {
+                type: Array,
+                value: ["Occassionally", "Daily", "Weekly", "Monthly"]
+            },
+        },
+        _addMe : function () {
+            console.log("addMe pressed!" + " " + this.reason + " " + this.occuranceChoices[this.occurance] + " " + this.rating + " " + this.hideAddMeInfoDialog);
+        },
+        _dialogDismiss : function () {
+            console.log("AddMe Dialog Dismissed. hideAddMeInfoDialog = " + this.hideAddMeInfoDialog);
+        },
+
+        attached: function() {
+            console.log(this.reason + ' ' + this.occurance + ' ' + this.rating + " " + this.addMeInfoDialogSetting);
+            this.$.dialog.positionTarget = this.$.addMeCard;
+            this.$.dialog.verticalAlign = "top";
+            //this.$.dialog.verticalOffset = "auto";
+            this.$.dialog.withBackdrop = false;
+            this.$.dialog.noCancelOnOutsideClick = true;
+            this.$.dialog.opened = true;
+        }
+
+    });
+    </script>
+</dom-module>

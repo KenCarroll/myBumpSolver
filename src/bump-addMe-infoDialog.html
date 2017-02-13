@@ -1,0 +1,39 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+
+<dom-module id="bump-addMe-infoDialog">
+    <template>
+        <style include="shared-styles">
+        :host {
+        display: block;
+
+        padding: 10px;
+      }
+        </style>
+       <paper-dialog >
+            <h1>AddMe</h1>
+            <p>When joining BUMPS you are able to share problem experiences. Your input will help others gain valuable problem insights.</p>
+            <p>This will substantially increase the chances of creating effective solutions that meet your needs.</p>
+            <div>
+                <paper-checkbox checked={{userChoice}}>Don't show me this again</paper-checkbox>
+            </div>
+            <div>
+                <paper-button dialog-dismiss on-tap="dialogDismiss">Got it</paper-button>
+            </div>
+       </paper-dialog >
+    </template>
+    <script>
+    Polymer({
+        is: "bump-addMe-infoDialog",
+        properties: {
+            userChoice: Boolean
+        },
+
+        dialogDismiss : function () {
+            console.log("AddMe Dialog Dismissed");
+        },
+    });
+    </script>
+</dom-module>

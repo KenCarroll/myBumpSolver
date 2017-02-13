@@ -1,0 +1,44 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+
+
+<dom-module id="bump-rating-slider">
+    <template>
+        <style include="shared-styles">
+        :host {
+        display: block;
+
+        padding: 10px;
+      }
+        </style>
+        <span>
+            <div>MyRating: <span>{{rating}}</span></div>
+            <paper-slider label="how do you rate it?" min="1" max="10" pin snap max-markers="10"  value={{rating}}></paper-slider>
+           </span>
+            <paper-button raised on-tap="addMe">addMe</paper-button>
+            
+        </div>
+
+
+    </template>
+    <script>
+    Polymer({
+        is: "bump-AddMe",
+        properties: {
+            reason: String,
+            frequency: String,
+            rating: Number
+        },
+        addMe : function () {
+            console.log("addMe pressed!" + " " + this.reason + " " + this.frequency + " " + this.rating);
+        }
+    });
+    </script>
+</dom-module>
